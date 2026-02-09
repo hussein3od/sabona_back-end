@@ -43,7 +43,7 @@ async function getAll(req, res) {
 
     const result = await pool.query('SELECT * FROM products')
 
-    res.json({Products: result})
+    res.json(result)
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: 'Failed to fetch products' })
