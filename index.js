@@ -27,6 +27,10 @@ app.use('/api/orders', orderRoutes)
 app.use('/api/messages', messageRoutes)
 app.use('/api/admin', adminRoutes)
 
+app.get('/', (req, res) => {
+  res.send("it's working")
+})
+
 app.listen(5000, () => {
   console.log("server")
 })
