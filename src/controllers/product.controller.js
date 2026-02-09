@@ -41,9 +41,9 @@ async function getAll(req, res) {
     //   ORDER BY p.created_at DESC
     // `)
 
-    // const result = await pool.query('SELECT * FROM products')
+    const result = await pool.query('SELECT * FROM products')
 
-    res.json({Products: "working"})
+    res.json({Products: result})
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: 'Failed to fetch products' })
