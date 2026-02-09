@@ -14,9 +14,9 @@ router.get('/:id', auth, ctrl.getById)
 // // إضافة منتج + صور متعددة
 router.post('/', auth, admin, upload.array('images', 5), ctrl.create)
 
-// router.put('/:id', auth, admin, upload.array('images', 5), ctrl.update)
+router.put('/:id', auth, admin, upload.array('images', 5), ctrl.update)
 
-// // حذف منتج
-// router.delete('/:id', auth, admin, ctrl.delete)
+// حذف منتج
+router.delete('/:id', auth, admin, ctrl.delete)
 
 export default router
