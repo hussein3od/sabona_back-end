@@ -1,13 +1,16 @@
 import pkg from 'pg'
 const { Pool } = pkg
 
-console.log('JWT_SECRET =', process.env.JWT_SECRET)
+let pool
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-})
+if (!global.pgPool) {
+  pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false },
+  })
+  global.pgPool = pool
+} else {
+  pool = global.pgPool
+}
 
 export default pool
