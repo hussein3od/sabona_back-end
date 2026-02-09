@@ -3,47 +3,46 @@ import pool from '../config/db.js'
 // جلب كل المنتجات
 async function getAll(req, res) {
   try {
-    // const result = await pool.query(`
-    //   SELECT 
-    //     p.id,
-    //     p.name_en,
-    //     p.name_ar,
-    //     p.description_en,
-    //     p.description_ar,
-    //     p.description_short_en,
-    //     p.description_short_ar,
-    //     p.usage_instructions_en,
-    //     p.usage_instructions_ar,
-    //     p.ingredients_en,
-    //     p.ingredients_ar,
-    //     p.warning_en,
-    //     p.warning_ar,
-    //     p.benefits_en,
-    //     p.benefits_ar,
-    //     p.price,
-    //     p.category_en,
-    //     p.category_ar,
-    //     p.skin_type_en,
-    //     p.skin_type_ar,
-    //     p.stock,
-    //     p.is_active,
-    //     p.created_at,
-    //     COALESCE(
-    //       json_agg(pi.image_url) 
-    //       FILTER (WHERE pi.image_url IS NOT NULL),
-    //       '[]'
-    //     ) AS images
-    //   FROM products p
-    //   LEFT JOIN product_images pi 
-    //     ON p.id = pi.product_id
-    //   WHERE p.is_active = true
-    //   GROUP BY p.id
-    //   ORDER BY p.created_at DESC
-    // `)
+    const result = await pool.query(`
+      SELECT 
+        p.id,
+        p.name_en,
+        p.name_ar,
+        p.description_en,
+        p.description_ar,
+        p.description_short_en,
+        p.description_short_ar,
+        p.usage_instructions_en,
+        p.usage_instructions_ar,
+        p.ingredients_en,
+        p.ingredients_ar,
+        p.warning_en,
+        p.warning_ar,
+        p.benefits_en,
+        p.benefits_ar,
+        p.price,
+        p.category_en,
+        p.category_ar,
+        p.skin_type_en,
+        p.skin_type_ar,
+        p.stock,
+        p.is_active,
+        p.created_at,
+        COALESCE(
+          json_agg(pi.image_url) 
+          FILTER (WHERE pi.image_url IS NOT NULL),
+          '[]'
+        ) AS images
+      FROM products p
+      LEFT JOIN product_images pi 
+        ON p.id = pi.product_id
+      WHERE p.is_active = true
+      GROUP BY p.id
+      ORDER BY p.created_at DESC
+    `)
 
-    const result = await pool.query('SELECT * FROM products')
 
-    res.json(result)
+    res.json(result.rows)
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: 'Failed to fetch products' })
