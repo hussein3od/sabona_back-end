@@ -295,8 +295,8 @@ async function remove(req, res) {
 
 export default {
   getAll,
-  // getById,
-  // create,
-  // update,
-  // delete: remove
+  getById,
+  create,
+  update,
+  delete: remove
 }
